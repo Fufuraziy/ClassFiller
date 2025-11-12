@@ -1,0 +1,73 @@
+{
+  "name": "classfiller",
+  "displayName": "Class Filler",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.classfiller"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "classfiller.helloWorld",
+        "title": "Classfiller: check avaliability"
+      },
+      {
+        "command": "classfiller.version",
+        "title": "Classfiller: get version"
+      },
+      {
+        "command": "classfiller.generateCppDefsFromHeader",
+        "title": "Classfiller: Generate C++ method templates from header"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "classfiller.generateCppDefsFromHeader",
+        "key": "ctrl+shift+g",
+        "mac": "shift+cmd+g"
+      }
+    ],
+    "configuration": {
+      "title": "C++ classfiller",
+      "properties": {
+        "classfiller.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the extension"
+        },
+        "classfiller.insertPosition": {
+          "type": "string",
+          "enum": ["cursor", "endOfFile", "afterIncludes"],
+          "default": "cursor",
+          "description": "Where to put generated realizations"
+        },
+        "classfiller.headerExtensions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "default": ["h", "hpp"],
+          "description": "List of possible header file types"
+        },
+        "classfiller.includeIfNecessary": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include the header file matching the code file's name"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  }
+}
